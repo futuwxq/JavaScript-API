@@ -6,20 +6,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .box {
+            width: 200px;
+            height: 600px;
+        }
+        
+        .test {
+            width: 100px;
+            height: 200px;
+            background: red;
+            margin: 50%;
+        }
+    </style>
 
 </head>
 
 <body>
-    <script>
-        var obj = {
-            foo: function() {
-                setTimeout(function() {
-                    console.log(this); //Window
-                })
-            }
-        }
+    <div class="box">
+        <!-- 子元素的 margin（margin-top  margin-left） 值的百分比  是相对于 父元素的 width 来计算的 -->
+        <!--  translate 属性是相对自己计算的 -->
+        <div class="test">
+            测试margin
+        </div>
+    </div>
 
-        obj.foo()
+    <script>
+        // var wordPattern = function(pattern, s) {
+        //     const char2word = new Map(); // char --- words
+        //     const word2char = new Map(); // words --- char
+        //     const words = s.split(' ');
+        //     //
+        //     if (pattern.length !== s.length) return false;
+        //     for (const [i, val] of words.entries()) {
+        //         const ch = pattern[i];
+        //         if (char2word.has(ch) && char2word.get(ch) != val || word2char.has(val) && word2char.get(val) != ch) return false;
+        //         char2word.set(ch, val);
+        //         word2char.set(val, ch);
+        //     }
+        //     return true;
+        // };
+
+        // wordPattern("jquery", "jquery")
     </script>
 </body>
 

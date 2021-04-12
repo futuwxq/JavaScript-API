@@ -50,3 +50,15 @@ let c1 = new Counter();
 c1.set(2);
 c1.set();
 console.log(c1.get()); //3
+
+
+/**
+ *  立即执行函数 会立即执行 
+ */
+
+document.addEventListener('click', (function() {
+    console.log(1);
+})())
+document.addEventListener('click', function() {
+    console.log(1);
+})
