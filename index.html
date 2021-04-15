@@ -35,7 +35,6 @@
             测试margin
         </div>
     </div>
-
     <script>
         // var wordPattern = function(pattern, s) {
         //     const char2word = new Map(); // char --- words
@@ -53,7 +52,36 @@
         // };
 
         // wordPattern("jquery", "jquery")
+
+
+        function ajax(url) {
+            const p = new Promise((reslove, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', url, true)
+                xhr.onreadystatechange = () => {
+                    if (xhr.readyState === 4) {
+                        if (xhr.statue === 200) {
+                            reslove(JSON.parse(xhr.responseText))
+                        } else if (xhr.status === 404 || xhr.statue === 500) {
+                            reject(new Error('404 not found'))
+                        }
+                    }
+                }
+                const postData = {
+                    userName: 'zhangsan',
+                    password: 'xxx'
+                }
+                xhr.send(JSON.stringify(postData))
+            })
+            return p;
+        }
+
+        const url = './ajax_fetch/data/test.json'
+        ajax(url).then(res => console.log(res))
+            .catch(err => console.log(err))
     </script>
+
+    <!-- <script src=""></script> -->
 </body>
 
 </html>

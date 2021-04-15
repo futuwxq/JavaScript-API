@@ -15,15 +15,20 @@
 // [c, d] = [d, c];
 // console.log(c, d); //[ 4, 5, 6 ] [ 1, 2, 3 ]
 
+//数组的元素交换
+let c = [1, 2, 3];
+[c[1], c[2]] = [c[2], c[1]];
+console.log(c); //[ 1, 3, 2 ]
+
 /**
  * 不完全解构
  */
 
-let [x, y] = [1, 2, 3];
-console.log(x, y); //1 2
+// let [x, y] = [1, 2, 3];
+// console.log(x, y); //1 2
 
-let [a, [b], d] = [1, [2, 3], 4];
-console.log(a, b, d); //1 2 4
+// let [a, [b], d] = [1, [2, 3], 4];
+// console.log(a, b, d); //1 2 4
 
 /**
  * 只要某种数据结构具有 Iterator 接口，都可以采用数组形式的解构赋值。                
@@ -36,5 +41,5 @@ console.log(a, b, d); //1 2 4
 // let { foo, bar } = { foo: 'aaa', bar: 'bbb' };
 // console.log(foo, bar); //aaa bbb
 
-let { fo, ba } = { fo: 'aaa', bar: 'bbb' };
-console.log(fo, ba); //aaa undefined
+// let { fo, ba } = { fo: 'aaa', bar: 'bbb' };
+// console.log(fo, ba); //aaa undefined
