@@ -36,39 +36,57 @@
         </div>
     </div>
     <script>
-        var exist = function(board, word) {
-            const m = board.length,
-                n = board[0].length;
-            const visited = new Array(m);
-            for (let i = 0; i < m; i++) {
-                visited[i] = new Array(n).fill(false);
-            }
-            // board[x][y] === word[i]
-            function dfs(x, y, i) {
-                // i <= length -1
-                if (i === word.length) return true;
-                if (x < 0 || x >= m || y < 0 || y >= n) return false;
-                if (visited[x][y] || board[x][y] !== word[i]) return false;
-                visited[x][y] = true;
+        // let Person = {}
+        // Object.defineProperty(Person, 'name', {
+        //     value: 'jack',
+        //     writable: true // 是否可以改变
+        // })
+        // console.log(Person);
+        // function add(...arg) {
+        //     arg.reduce((a, b) => a + b)
+        // }
+        // const curry = (fn) => {
+        //     let arg = [];
+        //     return function temp(...newArg) {
+        //         if (newArg.length) {
+        //             //...agr是新参数
+        //             arg = [...arg, ...newArg]
+        //             return temp;
+        //         } else { //没有参数的时候
+        //             let val = fn.apply(this, arg);
+        //             arg = [];
+        //             return val;
+        //         }
+        //     }
+        // }
+        // let addCurry = curry(add)
+        // console.log(addCurry(1)(2)(3)(1));
 
-                // 还不是所有的元素 子元素dfs
-                const isFind = dfs(x + 1, y, i + 1) || dfs(x - 1, y, i + 1) || dfs(x, y + 1, i + 1) || dfs(x, y - 1, i + 1);
-                if (isFind) return true;
-                // 撤销
-                visited[x][y] = false;
-                return false;
-            }
-            for (let i = 0; i < m; i++) {
-                for (let j = 0; j < n; j++) {
-                    if (board[i][j] = word[0] && dfs(i, j, 0)) return true;
+        function getJSON(url) {
+            let promise = new Promise((resolve, reject) => {
+                function handler() {
+                    if (this.readyState !== 4) {
+                        return;
+                    }
+                    if (this.status === 200) {
+                        resolve(this.response);
+                    } else {
+                        reject(new Error(this.statusText));
+                    }
                 }
-            }
-            return false;
-        };
-        let x = exist([
-            ["a", "b"]
-        ], "ba")
-        console.log(x);
+                let xhr = new XMLHttpRequest();
+                xhr.open('GET', url);
+                xhr.send();
+                xhr.onreadystatechange = handler;
+            })
+            return promise;
+        }
+
+        getJSON("http://152.136.185.210:8000/api/w6/home/multidata").then(function(data) {
+            console.log(data);
+        }).catch(function(res) {
+            console.log(res);
+        })
     </script>
 </body>
 

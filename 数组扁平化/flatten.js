@@ -30,6 +30,7 @@ const flatten = function(arr) {
  *  栈
  */
 const flatten1 = function(arr) {
+    // 元素入栈 
     const stk = [...arr];
     const res = [];
     while (stk.length) {

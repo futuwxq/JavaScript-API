@@ -27,28 +27,54 @@
 
 
 // post 请求  封装成Promise
-function ajax(url) {
-    const p = new Promise((reslove, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', url, true)
-        xhr.onreadystatechange = () => {
-            if (xhr.readyState === 4) {
-                if (xhr.statue === 200) {
-                    reslove(JSON.parse(xhr.responseText))
-                } else if (xhr.status === 404 || xhr.statue === 500) {
-                    reject(new Error('404 not found'))
-                }
+// function ajax(url) {
+//     const p = new Promise((reslove, reject) => {
+//         const xhr = new XMLHttpRequest();
+//         xhr.open('POST', url, true)
+//         xhr.onreadystatechange = () => {
+//             if (xhr.readyState === 4) {
+//                 if (xhr.statue === 200) {
+//                     reslove(JSON.parse(xhr.responseText))
+//                 } else if (xhr.status === 404 || xhr.statue === 500) {
+//                     reject(new Error('404 not found'))
+//                 }
+//             }
+//         }
+//         const postData = {
+//             userName: 'zhangsan',
+//             password: 'xxx'
+//         }
+//         xhr.send(JSON.stringify(postData))
+//     })
+//     return p;
+// }
+
+// const url = './data/test.json'
+// ajax(url).then(res => console.log(res))
+//     .catch(err => console.log(err))
+
+function getJSON(url) {
+    let promise = new Promise((resolve, reject) => {
+        function handler() {
+            if (this.readyState !== 4) {
+                return;
+            }
+            if (this.status === 200) {
+                resolve(this.response);
+            } else {
+                reject(new Error(this.statusText));
             }
         }
-        const postData = {
-            userName: 'zhangsan',
-            password: 'xxx'
-        }
-        xhr.send(JSON.stringify(postData))
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.send();
+        xhr.onreadystatechange = handler;
     })
-    return p;
+    return promise;
 }
 
-const url = './data/test.json'
-ajax(url).then(res => console.log(res))
-    .catch(err => console.log(err))
+getJSON("https://segmentfault.com/a/1190000021707081").then(function(data) {
+    console.log(data);
+}).catch(function(res) {
+    console.log(res);
+})

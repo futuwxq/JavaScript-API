@@ -12,6 +12,7 @@ function quick_sort(nums, l, r) {
 
 }
 
+
 function partition(nums, l, r) {
     //区间只剩下一个元素
     if (l === r) return l;

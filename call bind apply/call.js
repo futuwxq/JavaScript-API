@@ -7,9 +7,11 @@
 // 2. foo.fn()  执行方法
 // 3. 删除方法  delete foo.fn;
 
+//bar.call(foo) === foo.bar 方法 
 Function.prototype.myCall = function(context = window) {
-    context.fn = this; // bar.call(foo)  this 指向 bar
+    context.fn = this; //  this 指向 bar
     const arg = [...arguments].slice(1); // 传递的参数列表
+    //执行方法
     const result = context.fn(arg);
     delete context.fn; // 删除方法
     return result;
