@@ -19,10 +19,11 @@ Son.prototype.constructor = Son;
 
 const son1 = new Son('li', 10);
 const son2 = new Son('yi', 11)
-son1.fruits.push('orange');
+console.log(son1);
+// son1.fruits.push('orange');
 
-son1.getFruits() // [ 'apple', 'orange' ]
-son2.getFruits() // [ 'apple' ]
+// son1.getFruits() // [ 'apple', 'orange' ]
+// son2.getFruits() // [ 'apple' ]
 
 /** 特点 */
 

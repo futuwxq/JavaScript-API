@@ -42,25 +42,52 @@
 // console.log(obj.test1())
 // console.log(fn() === obj.test2())
 
-// 需要实现的函数
-function repeat(func, times, wait) {
-    return function wrapper(...args) {
-        setTimeout(() => {
-            if (--times) wrapper.apply(this, args); // 时间到了  每次执行一次函数
-            func.apply(this, args); // 接受第二个参数
-        }, wait)
-    }
-}
-// 使下面调用代码能正常工作
-// const repeatFunc = repeat(console.log, 4, 3000);
-// repeatFunc("helloworld"); //会输出4次 helloworld, 每次间隔3秒
 
-carray(1)(2)(3)
 
-function carray(...arg1) {
-    return function(...arg2) {
-        return function(...arg3) {
-            console.log(arg1 + arg2 + arg3);
-        }
-    }
-}
+// carray(1)(2)(3)
+
+// function carray(...arg1) {
+//     return function(...arg2) {
+//         return function(...arg3) {
+//             console.log(arg1 + arg2 + arg3);
+//         }
+//     }
+// }
+
+
+// obj.mybind(c)
+// function mybind(context, ...arg) {
+
+//     const fn = this;
+//     return function(...arg1) {
+//         return fn.apply(context, [...arg, ...arg1])
+//     }
+// }
+
+// const a = {
+//     aa: 1
+// }
+
+// function fn() {
+//     console.log(this.aa);
+// }
+
+// fn.bind(a)
+
+// function postOrder(root) {
+//     if (!root) return null;
+//     const stk = [];
+//     const ans = [];
+//     let cur = root;
+//     while (cur || stk.length) {
+//         if (cur) {
+//             stk.push(cur);
+//             ans.unshift(cur.val);
+//             cur = cur.right;
+//         } else {
+//             cur = stk.pop().left;
+//         }
+//         // if(root.right)
+//         // cur = cur.left;
+//     }
+// }

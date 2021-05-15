@@ -46,3 +46,10 @@ function prototype(parent, son) {
     prototype.constructor = son;
     son.prototype = prototype;
 }
+
+// object.create() 返回一个对象 对象的隐式原型执行参数 o
+function object(o) {
+    function F() {};
+    F.prototype = o;
+    return new F()
+}

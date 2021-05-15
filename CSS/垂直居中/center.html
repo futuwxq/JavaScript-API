@@ -1,0 +1,44 @@
+<!-- 
+  1. 块及元素水平方向居中
+  两侧auto，则平分剩余空间，相当于水平居中.(width宽度一定要设置，没有宽度的块默认就是100%，就没有auto值)
+  2. 垂直方向的居中
+    绝对定位:子绝父相
+
+  原理
+  1.在普通内容流中，margin:auto的效果等同于margin-top:0;margin-bottom:0。
+
+  2.position:absolute使绝对定位块跳出了内容流，内容流中的其余部分渲染时绝对定位部分不进行渲染。
+
+  3.为块区域设置top: 0; left: 0; bottom: 0; right: 0;将给浏览器重新分配一个边界框，此时该块块将填充其父元素的所有可用空间，所以margin 垂直方向上有了可分配的空间。
+
+  4.再设置margin 垂直方向上下为auto，即可实现垂直居中。
+ -->
+<style>
+    .container {
+        width: 200px;
+        height: 200px;
+        background-color: aquamarine;
+        display: inline-block;
+        position: relative;
+    }
+    
+    .box {
+        width: 100px;
+        height: 100px;
+        background-color: blueviolet;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="box"></div>
+    </div>
+</body>
+
+</html>

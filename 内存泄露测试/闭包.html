@@ -1,0 +1,18 @@
+<button onclick="myClick()">执行 fn 函数</button>
+<script>
+    function fn1() {
+        let a = new Array(10000);
+        let b = 3;
+
+        function fn2() {
+            let c = [1, 2, 3]
+        }
+        fn2();
+        return a
+    }
+    let res = [];
+
+    function myClick() {
+        res.push(fn1)
+    }
+</script>
