@@ -60,33 +60,60 @@
         //     }
         // }
         // let addCurry = curry(add)
-        // console.log(addCurry(1)(2)(3)(1));
+        // const url = "https://api.github.com/users/futuwxq"
 
-        function getJSON(url) {
-            let promise = new Promise((resolve, reject) => {
-                function handler() {
-                    if (this.readyState !== 4) {
-                        return;
-                    }
-                    if (this.status === 200) {
-                        resolve(this.response);
-                    } else {
-                        reject(new Error(this.statusText));
-                    }
-                }
-                let xhr = new XMLHttpRequest();
-                xhr.open('GET', url);
-                xhr.send();
-                xhr.onreadystatechange = handler;
+        // function getJSON(url) {
+        //     let promise = new Promise((resolve, reject) => {
+        //         function handler() {
+        //             if (this.readyState !== 4) {
+        //                 return;
+        //             }
+        //             if (this.status === 200) {
+        //                 resolve(this.response);
+        //             } else {
+        //                 reject(new Error(this.statusText));
+        //             }
+        //         }
+        //         let xhr = new XMLHttpRequest();
+        //         xhr.open('GET', url);
+        //         xhr.send();
+        //         xhr.onreadystatechange = handler;
+        //     })
+        //     return promise;
+        // }
+
+        // getJSON(url).then((data) => {
+        //     console.log(data);
+        // }).catch(function(res) {
+        //     console.log(res);
+        // })
+        // AbortController 用于手动终止一个或多个DOM请求，通过该对象的AbortSignal注入的Fetch的请求中。
+        let controller = new AbortController();
+        let timeoutPromise = (timeout) => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    // 超时之后依然会执行 fectch 请求
+                    // resolve('超时')
+                    resolve(() => {
+                        resolve(new Response('timeout', {
+                            status: 504,
+                            statusText: 'timeout'
+                        }));
+                        controller.abort();
+                    })
+                }, timeout)
             })
-            return promise;
         }
 
-        getJSON("http://152.136.185.210:8000/api/w6/home/multidata").then(function(data) {
-            console.log(data);
-        }).catch(function(res) {
-            console.log(res);
-        })
+        let fetchPromise = async(url, param) => {
+            setTimeout(() => {
+                return fetch(url)
+            }, param)
+        }
+        Promise.race([timeoutPromise(3000),
+            fetchPromise('https://api.github.com/users/futuwxq', 4000)
+        ]).
+        then(res => console.log(res)).catch(err => console.log(err))
     </script>
 </body>
 

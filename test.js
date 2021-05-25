@@ -91,3 +91,22 @@
 //         // cur = cur.left;
 //     }
 // }
+
+const getJSON = function(url) {
+    return new Promise((reslove, reject) => {
+        const handler = function() {
+            if (this.readyState === 4) {
+                if (this.status === 200) {
+                    reslove(this.response)
+                } else {
+                    reject(new Error(this.statusText))
+                }
+            }
+        }
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.send();
+        xhr.onreadystatechange = handler;
+    })
+
+}

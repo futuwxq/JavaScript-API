@@ -7,61 +7,81 @@
 
 // fetch()接收到的response是一个 Stream 对象，
 // response.json()是一个异步操作，取出所有内容，并将其转为 JSON 对象。
-fetch('https://api.github.com/users/futuwxq').then(response => response.json())
-    .then(json => console.log(json))
-    .catch(err => console.log('Request Failed', err));
+// fetch('https://api.github.com/users/futuwxq').then(response => response.json())
+//     .then(json => console.log(json))
+//     .catch(err => console.log('Request Failed', err));
 
 
-// 通过 await 语法，语义更加清晰
-const data = async function getJSON() {
-    let url = 'https://api.github.com/users/futuwxq';
-    // await 必须在 try ... catch 里面，才能捕获异步操作中可能发生的顺序
-    try {
-        let response = await fetch(url);
-        return await response.json();
-    } catch (error) {
-        console.log('Request Failed', error);
-    }
-}
+// // 通过 await 语法，语义更加清晰
+// const data = async function getJSON() {
+//     let url = 'https://api.github.com/users/futuwxq';
+//     // await 必须在 try ... catch 里面，才能捕获异步操作中可能发生的顺序
+//     try {
+//         let response = await fetch(url);
+//         return await response.json();
+//     } catch (error) {
+//         console.log('Request Failed', error);
+//     }
+// }
 
-// data().then(res => console.log(res)) // 获取到数据
+// // data().then(res => console.log(res)) // 获取到数据
 
 
-/**
- * response 里面的同步属性
- */
+// /**
+//  * response 里面的同步属性
+//  */
 
-async function fetchText() {
-    let response = await fetch('/readme.txt');
-    console.log(response.status); // 404
-    console.log(response.statusText); // not found
-}
+// async function fetchText() {
+//     let response = await fetch('/readme.txt');
+//     console.log(response.status); // 404
+//     console.log(response.statusText); // not found
+// }
 
 /*
  * 处理fetch 3 秒超时 
  */
-function timeout(url) {
-    setTimeout(function() {
+// function timeout(url) {
+//     setTimeout(function() {
+//         return fetch(url)
+//     }, 5000)
+// }
+// async function getJSON1(url) {
+//     let response = await timeout(url);
+//     const data = await response.json();
+
+//     setTimeout(function() {
+
+//         if (!data) {
+//             console.log(111);
+//             return new Error('Time out')
+//         }
+//     }, 3000)
+//     return data;
+// }
+// getJSON1('https://api.github.com/users/futuwxq').then(res => {
+//     console.log(res);
+// }).catch(err => {
+//     console.log(err);
+// })
+
+
+/**
+ * promise.race 实现 fetch 超时
+ */
+// 创建 timeoutPromise
+let timeoutPromise = (timeout) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            reject('超时')
+        }, timeout)
+    })
+}
+let fetchPromise = async(url, param) => {
+    setTimeout(() => {
         return fetch(url)
-    }, 5000)
+    }, param)
 }
-async function getJSON1(url) {
-    let response = await timeout(url);
-    const data = await response.json();
-
-    setTimeout(function() {
-
-        if (!data) {
-            console.log(111);
-            return new Error('Time out')
-        }
-    }, 3000)
-    return data;
-}
-
-// console.log(getJSON1('https://api.github.com/users/futuwxq'));
-getJSON1('https://api.github.com/users/futuwxq').then(res => {
-    console.log(res);
-}).catch(err => {
-    console.log(err);
-})
+Promise.race([timeoutPromise(3000),
+    fetchPromise('https://api.github.com/users/futuwxq', 4000)
+]).
+then(res => console.log(res)).catch(err => console.log(err))

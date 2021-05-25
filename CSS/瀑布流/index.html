@@ -1,0 +1,128 @@
+<!-- 
+  瀑布流，将相同宽度，高度不等的元素（大多时候是图片），整齐平整的呈现在用户眼前，
+  如果直接使用浮动，因为每个元素的高度不同，将会出现一大块空隙。
+  因此动态计算每次屏幕的最短高度，将下一个元素插入在这个最短高度下面。
+ -->
+
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .wrap {
+            position: relative;
+        }
+        
+        .img {
+            display: inline-block;
+            width: 200px;
+            margin: 10px 10px 0 0;
+            transition: all 1s;
+            position: absolute;
+        }
+        
+        .img>img {
+            width: 200px;
+        }
+    </style>
+</head>
+<div class="wrap">
+    <div class="img">
+        <img src="./img/0.jpg" alt="">
+    </div>
+    <div class="img">
+        <img src="./img/1.jpg" alt="">
+    </div>
+    <div class="img">
+        <img src="./img/2.jpg" alt="">
+    </div>
+    <div class="img">
+        <img src="./img/3.jpg" alt="">
+    </div>
+    <div class="img">
+        <img src="./img/4.jpg" alt="">
+    </div>
+    <div class="img">
+        <img src="./img/5.jpg" alt="">
+    </div>
+    <div class="img">
+        <img src="./img/6.jpg" alt="">
+    </div>
+    <div class="img">
+        <img src="./img/7.jpg" alt="">
+    </div>
+    <div class="img">
+        <img src="./img/8.jpg" alt="">
+    </div>
+    <div class="img">
+        <img src="./img/9.jpg" alt="">
+    </div>
+    <div class="img">
+        <img src="./img/10.jpg" alt="">
+    </div>
+    <div class="img">
+        <img src="./img/11.jpg" alt="">
+    </div>
+    <div class="img">
+        <img src="./img/12.jpg" alt="">
+    </div>
+    <div class="img">
+        <img src="./img/13.jpg" alt="">
+    </div>
+</div>
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script>
+    waterfalls();
+    // function waterfalls(){
+    //    const viewWidth = window.innerWidth || document.documentElement.clientWidth;
+    //   //  const elW = document.querySelectorAll
+
+    // }
+
+    function waterfalls() {
+        //  1. 计算每行可以有多少个元素
+        // 1.1 屏幕宽度
+        var $windowW = $(window).width(),
+            // 1.2 获取content+padding+border的宽度 200px
+            $elW = $("img").outerWidth(),
+            // 一行多少张图片 3
+            $lineNum = Math.floor($windowW / $elW),
+            array = [];
+        for (var i = 0; i < $lineNum; i++) {
+            // 000
+            array.push(0);
+        }
+        // 2. 计算每个 img 的 top 和 left
+        $(".img").each(function() {
+            // var $cur=$(this);
+            var min = array[0],
+                idx = 0;
+
+            //  2.1 min 当前列中高度最小的数值; idx 最小值的下标
+            for (var i = 0; i < array.length; i++) {
+                if (min > array[i]) {
+                    min = array[i];
+                    idx = i;
+                }
+            }
+            console.log(min, idx, array);
+            // 2.2 当前元素 top 为最小高度  left 为宽度 * 最小高度的下标
+            $(this).css({
+                top: min,
+                left: idx * $elW
+            });
+            //更新最小高度下面添加元素之后的高度
+            array[idx] = array[idx] + $(this).outerHeight();
+        })
+    }
+    // 3. 监听 load 和 resize 事件
+    $(window).on("load", function() {
+        waterfalls();
+    })
+    $(window).on("resize", function() {
+        waterfalls();
+    })
+</script>

@@ -1,0 +1,55 @@
+<!-- CSS做等边三角形  -->
+<!--  1. 用边框也就是border实现  -->
+<!--  -->
+<style>
+    .triangle {
+        margin: 10px;
+        width: 0;
+        height: 0;
+        /*
+        1. border left == right， top 或者 bottom 有颜色 ——> 等腰三角形
+        2. top == bottom ，left 或者 right 有颜色 ——> 等腰三角形
+        3. 都相等就是等边三角形 
+        */
+        border-top: 50px solid transparent;
+        border-left: 50px solid red;
+        border-bottom: 50px solid transparent;
+        border-right: 50px solid transparent;
+        transform: rotate(-90deg);
+    }
+    
+    .circle {
+        position: relative;
+        width: 50px;
+        height: 50px;
+        background: green;
+    }
+    
+    .circle::after {
+        content: 'x';
+        position: absolute;
+        text-align: center;
+        line-height: 20px;
+        background-color: red;
+        top: -10px;
+        right: -10px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+    }
+    
+    .test1 {
+        width: 50px;
+        height: 50px;
+        background: purple;
+        border-top: 50px solid red;
+        border-bottom: 50px solid green;
+        border-left: 50px solid blue;
+        border-right: 50px solid yellow;
+        margin: 0 auto;
+    }
+</style>
+<div class="triangle"></div>
+<div class="circle"></div>
+<!-- CSS实现梯形 -->
+<div class="test1"></div>

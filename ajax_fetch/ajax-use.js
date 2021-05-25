@@ -5,9 +5,12 @@
  * 
  * 
  * 1 ajax 使用
- * 1.1  xhr.open(method, url, async) 初始化 
+ * 1.0 创建XmlHttpRequest对象
+ * 1.1 xhr.open(method, url, async) 初始化参数
  *    async：是否异步请求，默认为 true（异步）
  * 1.2  xhr.send(data) 发送请求
+ * 1.3  接收信息 绑定回调
+ * 
  * 2 属性
  * 2.1 responseText： 请求返回的数据内容 
  * 2.2 status： 响应的HTTP状态，如 200 304 404 等
