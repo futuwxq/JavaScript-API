@@ -17,11 +17,14 @@
 // console.log(~1.2); //-2
 // console.log(~1.2536489);//-2
 
-// //判断数值中是否有某元素时
-// const arr = [1, 5, 6, 9]
-// if (arr.indexOf(9) > -1) {
-//     console.log('ok');
-// }
+/**
+ * 判断数值中是否有某元素时
+ */
+
+const arr = [1, 5, 6, 9]
+if (arr.indexOf(9) > -1) {
+    console.log('ok');
+}
 
 // if (~arr.indexOf(9)) console.log('has');
 
@@ -30,5 +33,5 @@
  * 对于浮点数，~~value可以代替parseInt(value)，而且前者效率更高些
  */
 
-// console.log(~~null);//0
-// console.log(~~1.2536489);//1
+console.log(~~null); //0
+console.log(~~1.2536489); //1

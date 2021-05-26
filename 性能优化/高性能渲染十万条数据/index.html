@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高性能渲染十万条数据</title>
+</head>
+
+<body>
+    <!-- 当遇到大量数据时，如何才能在不卡主页面的情况下渲染数据 -->
+    <!-- 参考 https://juejin.cn/post/6844903982742110216 -->
+    <ul id="container">
+
+    </ul>
+    <script src="./时间切片法.js"></script>
+    <script>
+        // 测试渲染时长
+        // let now = Date.now();
+        // const total = 100000;
+        // let ul = document.getElementById('container');
+        // for (let i = 0; i < total; i++) {
+        //     let li = document.createElement('li');
+        //     // ~~ 取整
+        //     li.textContent = ~~(Math.random() * total);
+        //     ul.appendChild(li);
+        // }
+        // //同步任务按照顺序执行
+        // console.log('JS 运行的事件:', Date.now() - now);
+
+        // // tick 之后会进行视图更新，之后执行下一次事件循环
+        // setTimeout(() => {
+        //     console.log('总运行时间:', Date.now() - now);
+        // }, 0)
+
+        // JS 运行的事件: 115
+        // 总运行时间: 2874 
+        // 主要问题是 浏览器的渲染阶段事件过长  Rendering
+    </script>
+</body>
+
+</html>
