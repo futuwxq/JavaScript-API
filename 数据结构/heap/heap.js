@@ -132,3 +132,7 @@ function heapSort(items) {
 var items = [, 1, 9, 2, 8, 3, 7, 4, 6, 5]
 heapSort(items)
 console.log(items);
+
+// 时间复杂度:建堆过程的时间复杂度是 O(n) ，排序过程的时间复杂度是 O(nlogn) ，整体时间复杂度是 O(nlogn)
+
+// 空间复杂度: O(1)
