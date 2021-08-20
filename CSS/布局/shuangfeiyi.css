@@ -1,0 +1,18 @@
+.main,
+.left,
+.right {
+    float: left;
+}
+
+.left {
+    margin-left: -100%;
+}
+
+.right {
+    margin-left: -200px;
+}
+
+.inner {
+    /* 帮左右占位置 */
+    margin: 0 200px;
+}

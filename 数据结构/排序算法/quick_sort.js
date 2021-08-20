@@ -16,22 +16,18 @@ function quick_sort(nums, l, r) {
 function partition(nums, l, r) {
     //区间只剩下一个元素
     if (l === r) return l;
-    let i = l,
-        j = r + 1;
+    let i = l;
+    // j = r + 1;
     const privote = nums[l];
-    while (true) {
-        while (nums[++i] < privote) {
-            if (i === r) break;
+    for (let j = i + 1; j < nums.length; j++) {
+        if (nums[j] < privote) {
+            i++;
+            [nums[i], nums[j]] = [nums[j], nums[i]]
         }
-        while (nums[--j] > privote) {
-            if (j === l) break;
-        }
-        if (i >= j) break; //所有元素都走了一遍 就退出循环了
-        swap(nums, i, j);
     }
-    // [l-j] <= privote  [j+1, n] >privote
-    swap(nums, l, j);
-    return j; //privote 回归到 j
+    [nums[l], nums[i]] = [nums[i], nums[l]]
+
+    return i; //privote 回归到 j
 }
 
 function swap(nums, i, j) {
@@ -40,6 +36,6 @@ function swap(nums, i, j) {
     nums[j] = temp;
 }
 
-let a = [5, 1, 2, 9, 4, 6];
-quick_sort(a, 0, 5);
+let a = [5, 1, 2, 9, 4, 6, 10, 0, 1];
+quick_sort(a, 0, 8);
 console.log(a);

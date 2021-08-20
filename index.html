@@ -36,84 +36,16 @@
         </div>
     </div>
     <script>
-        // let Person = {}
-        // Object.defineProperty(Person, 'name', {
-        //     value: 'jack',
-        //     writable: true // 是否可以改变
-        // })
-        // console.log(Person);
-        // function add(...arg) {
-        //     arg.reduce((a, b) => a + b)
-        // }
-        // const curry = (fn) => {
-        //     let arg = [];
-        //     return function temp(...newArg) {
-        //         if (newArg.length) {
-        //             //...agr是新参数
-        //             arg = [...arg, ...newArg]
-        //             return temp;
-        //         } else { //没有参数的时候
-        //             let val = fn.apply(this, arg);
-        //             arg = [];
-        //             return val;
-        //         }
-        //     }
-        // }
-        // let addCurry = curry(add)
-        // const url = "https://api.github.com/users/futuwxq"
-
-        // function getJSON(url) {
-        //     let promise = new Promise((resolve, reject) => {
-        //         function handler() {
-        //             if (this.readyState !== 4) {
-        //                 return;
-        //             }
-        //             if (this.status === 200) {
-        //                 resolve(this.response);
-        //             } else {
-        //                 reject(new Error(this.statusText));
-        //             }
-        //         }
-        //         let xhr = new XMLHttpRequest();
-        //         xhr.open('GET', url);
-        //         xhr.send();
-        //         xhr.onreadystatechange = handler;
-        //     })
-        //     return promise;
-        // }
-
-        // getJSON(url).then((data) => {
-        //     console.log(data);
-        // }).catch(function(res) {
-        //     console.log(res);
-        // })
-        // AbortController 用于手动终止一个或多个DOM请求，通过该对象的AbortSignal注入的Fetch的请求中。
-        let controller = new AbortController();
-        let timeoutPromise = (timeout) => {
-            return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    // 超时之后依然会执行 fectch 请求
-                    // resolve('超时')
-                    resolve(() => {
-                        resolve(new Response('timeout', {
-                            status: 504,
-                            statusText: 'timeout'
-                        }));
-                        controller.abort();
-                    })
-                }, timeout)
-            })
+        function changeObj(o) {
+            o.siteUrl = 'http://www.baidu.com'
+            o = new Object();
+            o.siteUrl = 'http://www.google.com'
         }
+        let Webiste = new Object();
+        debugger
+        changeObj(Webiste);
 
-        let fetchPromise = async(url, param) => {
-            setTimeout(() => {
-                return fetch(url)
-            }, param)
-        }
-        Promise.race([timeoutPromise(3000),
-            fetchPromise('https://api.github.com/users/futuwxq', 4000)
-        ]).
-        then(res => console.log(res)).catch(err => console.log(err))
+        console.log(Webiste);
     </script>
 </body>
 

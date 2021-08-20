@@ -1,0 +1,12 @@
+.main {
+    overflow: hidden;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    width: calc(100% - 200px);
+    float: left;
+}

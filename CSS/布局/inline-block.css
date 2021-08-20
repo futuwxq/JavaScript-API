@@ -1,0 +1,17 @@
+.main {
+    font-size: 0
+}
+
+.left {
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: top;
+    /* width: 25%; */
+}
+
+.right {
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: top;
+    width: calc(100% - 200px);
+}

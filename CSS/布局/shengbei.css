@@ -1,0 +1,21 @@
+.container {
+    overflow: hidden;
+    padding: 0 200px
+}
+
+.main,
+.left,
+.right {
+    float: left;
+    position: relative;
+}
+
+.left {
+    margin-left: -100%;
+    left: -200px;
+}
+
+.right {
+    right: -200px;
+    margin-left: -200px;
+}

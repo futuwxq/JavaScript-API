@@ -22,6 +22,7 @@ function lastRemaining(n, m) {
 console.log(lastRemaining(5, 3));
 
 /**
+ *  队列法
  *  1-m 每 n 个删除一个人
  */
 function myCirculQueue() {
@@ -58,3 +59,13 @@ function countOff(m, n) {
 }
 
 console.log(countOff(5, 3));
+
+/**
+ * 3 循环链表
+ * 循环链表的最后一个元素指向下一个元素的指针不是null，而是指向第一个元素（head)
+ */
+
+function CirDbList(element) {
+    this.head.next = this.head;
+    this.head.prev = this.head;
+}
